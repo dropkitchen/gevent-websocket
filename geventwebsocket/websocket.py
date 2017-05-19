@@ -375,6 +375,13 @@ class WebSocket(object):
             self.logger.debug("Closed WebSocket")
             self.closed = True
 
+            try:
+                # if we don't close, leaks open files in a CLOSE_WAIT state
+                self.stream.handler.socket.shutdown(socket.SHUT_RDWR)
+                self.stream.handler.socket.close()
+            except:
+                pass
+
             self.stream = None
             self.raw_write = None
             self.raw_read = None
