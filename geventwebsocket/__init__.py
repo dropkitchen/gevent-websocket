@@ -1,4 +1,4 @@
-VERSION = (0, 10, 1, 'final', 0)
+VERSION = (0, 10, 2, 'beta', 1)
 
 __all__ = [
     'WebSocketApplication',
